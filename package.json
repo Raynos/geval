@@ -18,7 +18,8 @@
   "dependencies": {},
   "devDependencies": {
     "tape": "~2.3.2",
-    "process": "~0.5.1"
+    "process": "git://github.com/Raynos/node-process#patch-2",
+    "browserify": "~3.18.0"
   },
   "licenses": [
     {
