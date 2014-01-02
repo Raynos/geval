@@ -30,7 +30,7 @@ var removeListener = clicks(function listener(ev) {
 
 ## Motivation
 
-EventEmitter's are complex. They are duplexed events by default
+EventEmitter's are complex. They are multiplexed events by default
 
 `Event` is the simpler version of an `EventEmitter`
 
@@ -40,7 +40,8 @@ The main differences are:
   - no implicit string based events
   - forces explicit interfaces with named properties that are
       `Event`'s
-  - no inheritance
+  - no inheritance, you don't have to inherit from `Event` like
+      you have to inherit from `EventEmitter`.
   - `Event` interface only has public listening functionality,
       this gives a clear seperation between broadcast and listen
 
@@ -71,6 +72,53 @@ stream.ondata(onData)
 stream.onend(onEnd)
 stream.onclose(onClose)
 ```
+
+Here the benefits are:
+
+ - `stream` is an object of your shape and choice, you can call
+      the properties whatever you want. the `[[Prototype]]` can
+      be whatever you want.
+ - `stream` has three well named properties that can be inspected
+      statically or at run time which means the consumer knows
+      exactly what type of events are available.
+ - A consumer of `stream` could pass the `ondata` event to 
+      another object or module without also passing all other
+      events along.
+ - the `ondata` event is a concrete value. This allows for
+      calling higher order functions on the value and enables
+      various types of reactive programming techniques. 
+ - there are no special `"error"` semantics. There is no magic
+      integration with `domain` or `"uncaughtException"`.
+ - there is no public `emit()` function on the `stream` interface
+      It's impossible for the consumer to emit events that it
+      should not be emitting, you know that all events that 
+      come out of `ondata` are coming from the actual `stream`
+      implementation.
+
+## Docs
+
+### `var removeListener = ev(function listener(value) {})`
+
+A concrete `ev` is a function which you can pass a `listener`
+  to. The `listener` you pass to `ev` will be called with
+  an `value` each time an event occurs.
+
+When calling `ev` with a `listener` it will return a 
+  `removeListener` function. You can call `removeListener` to
+  remove your `listener` function from the event. After you call
+  it your listener function will not be called with any future
+  values coming from the event.
+
+### `var ev = Event(function broadcaster(broadcast) {})`
+
+`Event` takes a broadcasting function and returns an `event`
+  function.
+
+The `broadcasting` function takes one argument, the `broadcast`
+  function. The broadcaster can call `broadcast` each time it
+  wants to make an event occur. Each time you call `broadcast`
+  with a `value`, all listeners that are registered with `ev` 
+  will be invoked with the `value`
 
 ## Installation
 
