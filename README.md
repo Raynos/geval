@@ -99,6 +99,18 @@ Here the benefits are:
 
 ### `var removeListener = ev(function listener(value) {})`
 
+```js
+var Event = require("geval")
+
+var ev = Event(...)
+
+var removeListener = ev(function listener(value) {
+  /* do something with the event value */
+})
+
+// call `removeListener()` when you are done with the `ev`.
+```
+
 A concrete `ev` is a function which you can pass a `listener`
   to. The `listener` you pass to `ev` will be called with
   an `value` each time an event occurs.
@@ -110,6 +122,15 @@ When calling `ev` with a `listener` it will return a
   values coming from the event.
 
 ### `var ev = Event(function broadcaster(broadcast) {})`
+
+```js
+var Event = require("geval")
+
+var ev = Event(function broadcaster(broadcast) {
+  /* call broadcast with a value */
+})
+```
+
 
 `Event` takes a broadcasting function and returns an `event`
   function.
