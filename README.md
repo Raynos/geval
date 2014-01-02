@@ -1,14 +1,11 @@
 # geval
 
-<!--
-    [![build status][1]][2]
-    [![NPM version][3]][4]
-    [![Coverage Status][5]][6]
-    [![gemnasium Dependency Status][7]][8]
-    [![Davis Dependency status][9]][10]
--->
+[![build status][1]][2]
+[![NPM version][3]][4]
+[![Coverage Status][5]][6]
+[![Davis Dependency status][9]][10]
 
-<!-- [![browser support][11]][12] -->
+[![browser support][11]][12]
 
 An implementation of an event
 
