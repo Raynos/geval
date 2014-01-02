@@ -2,13 +2,13 @@ var test = require("tape")
 var process = require("process")
 
 var EventSource = require("../source.js")
-var EventMutable = require("../mutable.js")
+var Event = require("../event.js")
 
 var END = {}
 
 test("Event is a function", function (assert) {
     assert.equal(typeof EventSource, "function")
-    assert.equal(typeof EventMutable, "function")
+    assert.equal(typeof Event, "function")
     assert.end()
 })
 
@@ -40,14 +40,14 @@ test("EventSource works", function (assert) {
     }
 })
 
-test("EventMutable works", function (assert) {
+test("Event works", function (assert) {
     var values = [1, 2, 3, END, 4]
     var results = []
 
-    var event = EventMutable()
-    assert.equal(typeof event, "function")
+    var event = Event()
+    assert.equal(typeof event.listen, "function")
 
-    var removeListener = event(listener)
+    var removeListener = event.listen(listener)
     assert.equal(typeof removeListener, "function")
 
     assert.equal("broadcast" in event, true)

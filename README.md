@@ -12,31 +12,13 @@ An implementation of an event
 ## Example
 
 ```js
-var Event = require("geval/source")
+var Event = require("geval")
 var document = require("global/document")
 
 var clicks = Event(function (broadcast) {
     document.addEventListener("click", function (ev) {
         broadcast(ev)
     })
-})
-
-var removeListener = clicks(function listener(ev) {
-    console.log('click happened', ev)
-})
-
-// later you can call `removeListener()` to stop listening to events
-```
-
-## Mutable events
-
-```js
-var EventMutable = require("geval/mutable")
-var document = require("global/document")
-
-var clicks = EventMutable()
-document.addEventListener("click", function (ev) {
-    clicks.broadcast(ev)
 })
 
 var removeListener = clicks(function listener(ev) {
@@ -77,12 +59,12 @@ stream.on('close', onClose)
 you can do:
 
 ```js
-var Event = require('geval/mutable')
+var Event = require('geval')
 
 var stream = {
-  ondata: Event(),
-  onend: Event(),
-  onclose: Event()
+  ondata: Event(function () { ... }),
+  onend: Event(function () { ... }),
+  onclose: Event(function () { ... })
 }
 
 stream.ondata(onData)

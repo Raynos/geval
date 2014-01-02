@@ -6,6 +6,7 @@
   "author": "Raynos <raynos2@gmail.com>",
   "repository": "git://github.com/Raynos/geval.git",
   "homepage": "https://github.com/Raynos/geval",
+  "main": "source.js",
   "contributors": [
     {
       "name": "Raynos"
@@ -18,7 +19,7 @@
   "dependencies": {},
   "devDependencies": {
     "tape": "~2.3.2",
-    "process": "git://github.com/Raynos/node-process#patch-2",
+    "process": "~0.5.2",
     "browserify": "~3.18.0"
   },
   "licenses": [

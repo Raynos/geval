@@ -3,6 +3,7 @@ type Event<T> := (listener: (T) => void) =>
 
 geval/source := (broadcast: (T) => void) => Event<T>
 
-geval/mutable := () => Event<T> & {
+geval/event := () => {
+    listen: Event<T>,
     broadcast: (T) => void
 }

@@ -1,11 +1,9 @@
-module.exports = Mutable
+module.exports = Event
 
-function Mutable() {
+function Event() {
     var listeners = []
 
-    event.broadcast = broadcast
-
-    return event
+    return { broadcast: broadcast, listen: event }
 
     function broadcast(value) {
         for (var i = 0; i < listeners.length; i++) {

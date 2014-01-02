@@ -1,13 +1,11 @@
-var Mutable = require('./mutable.js')
+var Event = require('./event.js')
 
 module.exports = Source
 
 function Source(broadcaster) {
-    var event = Mutable()
-    var broadcast = event.broadcast
-    delete event.broadcast
+    var tuple = Event()
 
-    broadcaster(broadcast)
+    broadcaster(tuple.broadcast)
 
-    return event
+    return tuple.listen
 }
