@@ -28,6 +28,24 @@ var removeListener = clicks(function listener(ev) {
 // later you can call `removeListener()` to stop listening to events
 ```
 
+## What about [`dominictarr/observable`](https://github.com/dominictarr/observable) ?
+
+Both `geval` and `observable` having a similar interface.
+
+ - `thing(function (ev) { ... })` listens for new values.
+
+The main difference is that `geval` is an `Event`. For discrete 
+  events it doesn't make sense to call `thing()` to get the
+  current state. Events do not have a notion of current state.
+
+So the `"click"` event doesn't have a `.get()` method because
+  clicks do not have a notion of current state that makes sense
+
+However you should not make an `Event` of the windows current
+  width & height. You should make an `observable` instead which
+  internally listens on the `"resize"` event and sets the correct
+  new width & height.
+
 ## Motivation
 
 EventEmitter's are complex. They are multiplexed events by default
