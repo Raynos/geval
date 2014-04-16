@@ -7,7 +7,7 @@ function Single() {
 
     return function event(value) {
         if (typeof value === "function") {
-            return tuple.broadcast(value)
+            return tuple.listen(value)
         } else {
             return tuple.broadcast(value)
         }
