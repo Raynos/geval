@@ -69,6 +69,29 @@ test("Event works", function (assert) {
     }
 })
 
+test("Double remove listener", function (assert) {
+    var event = Event();
+    var results = [];
+
+    var removeListener = event.listen(listener);
+
+    event.broadcast('foo');
+    removeListener();
+
+    assert.doesNotThrow(function () {
+        removeListener()
+    })
+
+    event.broadcast('bar')
+
+    assert.deepEqual(results, ['foo'])
+    assert.end()
+
+    function listener(x) {
+        results.push(x)
+    }
+})
+
 test("single", function (assert) {
     var ev = Single()
     var results = []
