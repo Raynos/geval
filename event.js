@@ -2,12 +2,15 @@ module.exports = Event
 
 function Event() {
     var listeners = []
+    var listenersToBroadcast = []
 
     return { broadcast: broadcast, listen: event }
 
     function broadcast(value) {
-        for (var i = 0; i < listeners.length; i++) {
-            listeners[i](value)
+        listenersToBroadcast = listeners.concat();
+        // don't use indexes, this list can be edited while handlers are running
+        while (listenersToBroadcast.length) {
+            listenersToBroadcast.pop()(value)
         }
     }
 
@@ -20,6 +23,11 @@ function Event() {
             var index = listeners.indexOf(listener)
             if (index !== -1) {
                 listeners.splice(index, 1)
+            }
+            // if we're mid-broadcast then remove handlers that have not yet fired
+            index = listenersToBroadcast.indexOf(listener)
+            if (index !== -1) {
+                listenersToBroadcast.splice(index, 1)
             }
         }
     }
