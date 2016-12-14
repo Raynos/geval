@@ -144,6 +144,20 @@ test("unlisten from handler", function (assert) {
     event.broadcast(1);
 })
 
+test("unlisten another from handler", function (assert) {
+    var event = Event();
+    assert.plan(1);
+
+    event.listen(function () {
+        assert.doesNotThrow(unlisten);
+    });
+    var unlisten = event.listen(function () {
+        assert.fail();
+    });
+
+    event.broadcast(1);
+})
+
 
 
 
