@@ -130,6 +130,19 @@ test("multiple", function (assert) {
     assert.end()
 })
 
+test("unlisten from handler", function (assert) {
+    var event = Event();
+    assert.plan(2);
+
+    var unlisten = event.listen(function () {
+        assert.doesNotThrow(unlisten);
+    });
+    event.listen(function () {
+        assert.pass();
+    });
+
+    event.broadcast(1);
+})
 
 
 
