@@ -131,31 +131,45 @@ test("multiple", function (assert) {
 })
 
 test("unlisten from handler", function (assert) {
-    var event = Event();
-    assert.plan(2);
+    var event = Event()
+    assert.plan(2)
 
     var unlisten = event.listen(function () {
-        assert.doesNotThrow(unlisten);
-    });
+        assert.doesNotThrow(unlisten)
+    })
     event.listen(function () {
-        assert.pass();
-    });
+        assert.pass()
+    })
 
-    event.broadcast(1);
+    event.broadcast(1)
 })
 
 test("unlisten another from handler", function (assert) {
-    var event = Event();
-    assert.plan(1);
+    var event = Event()
+    assert.plan(1)
 
     event.listen(function () {
-        assert.doesNotThrow(unlisten);
-    });
+        assert.doesNotThrow(unlisten)
+    })
     var unlisten = event.listen(function () {
-        assert.fail();
-    });
+        assert.fail()
+    })
 
-    event.broadcast(1);
+    event.broadcast(1)
+})
+
+test("handlers registered from listeners dont running early", function (assert) {
+    var event = Event()
+    assert.plan(1)
+
+    event.listen(function () {
+        assert.pass()
+        event.listen(function () {
+            assert.fail()
+        })
+    })
+
+    event.broadcast(1)
 })
 
 

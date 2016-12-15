@@ -7,7 +7,7 @@ function Event() {
     return { broadcast: broadcast, listen: event }
 
     function broadcast(value) {
-        listenersToBroadcast = listeners.slice();
+        listenersToBroadcast = listeners.slice()
         // don't use indexes, this list can be edited while handlers are running
         while (listenersToBroadcast.length) {
             listenersToBroadcast.shift()(value)
